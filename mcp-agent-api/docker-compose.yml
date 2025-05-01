@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  ui:
+    build:
+      context: ./src/ui
+    container_name: ui
+    ports:
+      - "8001:8001"
+    networks:
+      - mcp-net
+
+  math_mcp_server:
+    build:
+      context: ./src/math_mcp_server
+    container_name: math_mcp_server
+    ports:
+      - "8003:8003"
+      - "8008:8008"
+    networks:
+      - mcp-net
+
+  fastapi_agent:
+    build:
+      context: ./src/fastapi_agent
+    container_name: fastapi_agent
+    ports:
+      - "8002:8002"
+    environment:
+      - GROQ_API_KEY=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
+      - BOOKING_MCP_SERVER_URL=http://math_mcp_server:8003/sse
+    networks:
+      - mcp-net
+    depends_on:
+      - math_mcp_server
+
+networks:
+  mcp-net:
+    driver: bridge

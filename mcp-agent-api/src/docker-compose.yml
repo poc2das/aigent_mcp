@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  ui:
+    build:
+      context: ./src/ui
+    container_name: ui
+    ports:
+      - "8001:8001"
+    networks:
+      - mcp-net
+
+  booking_mcp_server:
+    build:
+      context: ./src/booking_mcp_server
+    container_name: booking_mcp_server
+    ports:
+      - "8003:8003"
+      - "8008:8008"
+    networks:
+      - mcp-net
+
+  booking_agent:
+    build:
+      context: ./src/fastapi_agent
+    container_name: booking_agent
+    ports:
+      - "8002:8002"
+    environment:
+      - GROQ_API_KEY=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
+      - BOOKING_MCP_SERVER_URL=http://booking_mcp_server:8003/sse
+    networks:
+      - mcp-net
+    depends_on:
+      - booking_mcp_server
+
+networks:
+  mcp-net:
+    driver: bridge

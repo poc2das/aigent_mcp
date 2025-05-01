@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Approval Queue</title></head>
+<body>
+<h1>Pending Approvals</h1>
+<ul>
+  {% for session_id, session in sessions.items() %}
+    <li>
+      Session {{ session_id }}: "{{ session.prompt }}" -
+      <a href="/approve/{{ session_id }}">Approve/Edit</a>
+    </li>
+  {% else %}
+    <li>No pending approvals.</li>
+  {% endfor %}
+</ul>
+</body>
+</html>

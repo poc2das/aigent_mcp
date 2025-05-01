@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>Approve Prompt</title></head>
+<body>
+<h1>Approve or Edit Prompt</h1>
+<form method="post">
+  <label>Original Prompt:</label><br>
+  <textarea readonly rows="2" cols="60">{{ prompt }}</textarea><br><br>
+  <label>Edit Prompt:</label><br>
+  <textarea name="edited_prompt" rows="2" cols="60">{{ edited_prompt }}</textarea><br><br>
+  <label>Approve?</label><br>
+  <select name="approved">
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select><br><br>
+  <input type="submit" value="Submit">
+</form>
+<p><strong>LLM Completion:</strong><br>{{ completion }}</p>
+<a href="/">Back to queue</a>
+</body>
+</html>
