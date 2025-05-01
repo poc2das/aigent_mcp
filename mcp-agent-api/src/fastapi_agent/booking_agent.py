@@ -26,7 +26,7 @@ httpx_logger = logging.getLogger("httpx")
 httpx_logger.setLevel(logging.DEBUG)
 
 # Set your Groq API key and base URL (replace with your actual keys)
-os.environ["GROQ_API_KEY"] = "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"
+os.environ["GROQ_API_KEY"] = ""
 os.environ["GROQ_API_BASE_URL"] = "https://api.groq.com/openai/v1"
 
 app = FastAPI()
